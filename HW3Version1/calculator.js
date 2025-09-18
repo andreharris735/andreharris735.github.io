@@ -6,12 +6,7 @@ const resultsList = []; // store numeric results
 // Hook up button after DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("calcBtn").addEventListener("click", calculate);
-
 });
-document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("cancelBtn").addEventListener("click", updateStatistics);
-});
-
 
 function calculate() {
     const rawNum1 = document.getElementById("num1").value.trim();
@@ -56,11 +51,12 @@ function insertIntoTable(num1, operator, num2, resultDisplay, numericResult) {
     row.insertCell(3).innerText = resultDisplay;
 
     if (typeof numericResult === "number" && !isNaN(numericResult)) {
-        resultsList.push(numericResult);
+        updateStatistics(numericResult);
     }
 }
 
-function updateStatistics() {
+function updateStatistics(result) {
+    resultsList.push(result);
 
     const min = Math.min(...resultsList);
     const max = Math.max(...resultsList);
